@@ -9,7 +9,7 @@ helpviewer_keywords:
   - "OutputAssembly compiler option [C#]"
   - "PlatformTarget compiler option [C#]"
   - "ProduceReferenceAssembly compiler option [C#]"
-  - "TargetType compiler option [C#]"
+  - "OutputType compiler option [C#]"
 ---
 # C# Compiler Options that control compiler output
 
@@ -21,7 +21,7 @@ The following options control compiler output generation.
 | **OutputAssembly** | `-out:` | Specify the output assembly file. |
 | **PlatformTarget** | `-platform:` | Specify the target platform CPU. |
 | **ProduceReferenceAssembly** | `-refout:` | Generate a reference assembly. |
-| **TargetType** | `-target:` | Specify the type of the output assembly. |
+| **OutputType** | `-target:` | Specify the type of the output assembly. |
 
 ## DocumentationFile
 
@@ -31,7 +31,7 @@ The **DocumentationFile** option allows you to place documentation comments in a
 <DocumentationFile>path/to/file.xml</DocumentationFile>
 ```
 
-The source code file that contains Main or top-level statements is output first into the XML. You'll often want to use the generated .xml file with [IntelliSense](/visualstudio/ide/using-intellisense). The *.xml* filename must be the same as the assembly name. The *.xml* file must be in the same directory as the assembly. When the assembly is referenced in a Visual Studio project, the *.xml* file is found as well. For more information about generating code comments, see [Supplying Code Comments](/visualstudio/ide/reference/generate-xml-documentation-comments). Unless you compile with [`<TargetType:Module>`](#targettype), `file` will contain `<assembly>` and `</assembly>` tags specifying the name of the file containing the assembly manifest for the output file. For examples, see [How to use the XML documentation features](../xmldoc/index.md).
+The source code file that contains Main or top-level statements is output first into the XML. You'll often want to use the generated .xml file with [IntelliSense](/visualstudio/ide/using-intellisense). The *.xml* filename must be the same as the assembly name. The *.xml* file must be in the same directory as the assembly. When the assembly is referenced in a Visual Studio project, the *.xml* file is found as well. For more information about generating code comments, see [Supplying Code Comments](/visualstudio/ide/reference/generate-xml-documentation-comments). Unless you compile with [`<TargetType:Module>`](#outputtype), `file` will contain `<assembly>` and `</assembly>` tags specifying the name of the file containing the assembly manifest for the output file. For examples, see [How to use the XML documentation features](../xmldoc/index.md).
 
 > [!NOTE]
 > The **DocumentationFile** option applies to all files in the project. To disable warnings related to documentation comments for a specific file or section of code, use [#pragma warning](../preprocessor-directives.md#pragma-warning).
@@ -100,9 +100,9 @@ You generally don't need to work directly with reference assembly files. By defa
 
 .NET SDK 6.0.200 made a [change](../../../core/compatibility/sdk/6.0/write-reference-assemblies-to-obj.md) that moved reference assemblies from the output directory to the intermediate directory by default.
 
-## TargetType
+## OutputType
 
-The **TargetType** compiler option can be specified in one of the following forms:  
+The **OutputType** compiler option can be specified in one of the following forms:  
   
 - **library**: to create a code library. **library** is the default value.
 - **exe**: to create an .exe file.  
@@ -115,7 +115,7 @@ The **TargetType** compiler option can be specified in one of the following form
 > For .NET Framework targets, unless you specify **module**, this option causes a .NET Framework assembly manifest to be placed in an output file. For more information, see [Assemblies in .NET](../../../standard/assembly/index.md) and [Common Attributes](../attributes/global.md).
 
 ```xml
-<TargetType>library</TargetType>
+<OutputType>library</OutputType>
 ```
 
 The compiler creates only one assembly manifest per compilation. Information about all files in a compilation is placed in the assembly manifest. When producing multiple output files at the command line, only one assembly manifest can be created and it must go into the first output file specified on the command line.
